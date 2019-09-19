@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import subprocess, os, platform
 
 mpl.use("pdf")
 
@@ -52,4 +53,16 @@ class Plotter:
         plt.plot(x, y, linewidth=_linewidth, label=self.label)
         plt.legend()
         plt.grid()
-        self.fig.savefig(self.outfile + ".pdf")
+        try:
+            self.fig.savefig(self.outfile + ".pdf")
+
+            filepath = self.outfile + ".pdf"
+            if platform.system() == "Darwin":  # macOS
+                subprocess.call(("open", filepath))
+            elif platform.system() == "Windows":  # Windows
+                os.startfile(filepath)
+            else:  # linux variants
+                subprocess.call(("xdg-open", filepath))
+            print("Image created! 🎉🥳")
+        except:
+            print("There was some error 😱")
