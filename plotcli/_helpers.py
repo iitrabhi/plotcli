@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import subprocess, os, platform
+import sys
 
 mpl.use("pdf")
 
@@ -49,10 +50,22 @@ class Plotter:
 
     def plot(self):
         _linewidth = 2.0
-        x, y = np.loadtxt(self.infile, unpack=True)
-        plt.plot(x, y, linewidth=_linewidth, label=self.label)
+        try:
+            if self.infile == "all":  # ToDo: make a good qualifier
+                for file in os.listdir(os.getcwd()):
+                    if file.endswith(".txt"):
+                        print(file[:-4])
+                        x, y = np.loadtxt(file, unpack=True)
+                        plt.plot(x, y, linewidth=_linewidth, label=file[:-4])
+            else:
+                x, y = np.loadtxt(self.infile, unpack=True)
+                plt.plot(x, y, linewidth=_linewidth, label=self.label)
+        except:
+            print("File not found 😱")
+            sys.exit(1)
         plt.legend()
         plt.grid()
+        # plt.show()
         try:
             self.fig.savefig(self.outfile + ".pdf")
 
