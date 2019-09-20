@@ -33,8 +33,6 @@ class Plotter:
         plt.rcParams["font.family"] = "serif"
         plt.rcParams['mathtext.fontset'] = 'stix'
         plt.rcParams['font.family'] = 'STIXGeneral'
-        #plt.rcParams["font.serif"] = "Times"
-        # plt.rc("text", usetex=True)
         plt.rc("xtick", labelsize=_size_secondary)
         plt.rc("ytick", labelsize=_size_secondary)
         plt.rc("axes", labelsize=_size_primary)
