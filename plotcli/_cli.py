@@ -10,7 +10,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     # plot
-    write(args.infile, args.outfile, args.label)
+    write(args)
+    print(args)
     return
 
 
@@ -19,26 +20,31 @@ def _get_parser():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description=("Make 2d pdf plot."),
-        formatter_class=argparse.RawTextHelpFormatter,
-    )
-
-    parser.add_argument("infile", type=str, help="text file to be read from")
-
-    parser.add_argument(
-        "outfile", type=str, help="mesh file to be written to"
+        description=("Make 2d pdf plot."), formatter_class=argparse.RawTextHelpFormatter
     )
 
     parser.add_argument(
-        "label", type=str, help="label for plot"
+        "--infile", "-i", default="all", type=str, help="text file to be read from"
     )
 
     parser.add_argument(
-        "--x_label", "-x", action="store_true", help="set x label"
+        "--outfile", "-o", default="output", type=str, help="mesh file to be written to"
     )
 
     parser.add_argument(
-        "--y_label", "-y", action="store_true", help="set y label"
+        "--x_label",
+        "-x",
+        default="Load (kN)",
+        type=str,
+        help="set x label",
+    )
+
+    parser.add_argument(
+        "--y_label",
+        "-y",
+        default="Displacement (mm)",
+        type=str,
+        help="set y label",
     )
 
     return parser

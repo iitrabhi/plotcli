@@ -7,18 +7,17 @@ import sys
 mpl.use("pdf")
 
 
-def write(infile, outfile, label):
-    plotter = Plotter(infile, outfile, label)
-    plotter.set_labels()
+def write(args):
+    plotter = Plotter(args.infile, args.outfile)
+    plotter.set_labels(args.x_label, args.y_label)
     plotter.plot()
     pass
 
 
 class Plotter:
-    def __init__(self, infile, outfile, label):
+    def __init__(self, infile, outfile):
         self.infile = infile
         self.outfile = outfile
-        self.label = label
         self.initialize_plot()
 
     def initialize_plot(self):
@@ -31,8 +30,8 @@ class Plotter:
         mpl.font_manager._rebuild()
 
         plt.rcParams["font.family"] = "serif"
-        plt.rcParams['mathtext.fontset'] = 'stix'
-        plt.rcParams['font.family'] = 'STIXGeneral'
+        plt.rcParams["mathtext.fontset"] = "stix"
+        plt.rcParams["font.family"] = "STIXGeneral"
         plt.rc("xtick", labelsize=_size_secondary)
         plt.rc("ytick", labelsize=_size_secondary)
         plt.rc("axes", labelsize=_size_primary)
@@ -44,9 +43,9 @@ class Plotter:
         )
         self.fig.set_size_inches(_width, _height)
 
-    def set_labels(self):
-        self.ax.set_ylabel("Load (kN)")
-        self.ax.set_xlabel("Displacement (mm)")
+    def set_labels(self, x_lable, y_lable):
+        self.ax.set_xlabel(x_lable)
+        self.ax.set_ylabel(y_lable)
 
     def plot(self):
         _linewidth = 2.0
@@ -59,7 +58,7 @@ class Plotter:
                         plt.plot(x, y, linewidth=_linewidth, label=file[:-4])
             else:
                 x, y = np.loadtxt(self.infile, unpack=True)
-                plt.plot(x, y, linewidth=_linewidth, label=self.label)
+                plt.plot(x, y, linewidth=_linewidth, label=self.infile[:-4])
         except:
             print("File not found 😱")
             sys.exit(1)

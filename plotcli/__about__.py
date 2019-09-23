@@ -1,4 +1,4 @@
-__version__ = "1.0.0"
+__version__ = "1.1"
 __author__ = "Abhinav Gupta"
 __author_email__ = "iitrabhi@gmail.com"
 __copyright__ = "Copyright (c) 2019-2020 {} <{}>".format(
@@ -6,4 +6,4 @@ __copyright__ = "Copyright (c) 2019-2020 {} <{}>".format(
 )
 __website__ = "https://github.com/iitrabhi/plotcli"
 __license__ = "License :: OSI Approved :: MIT License"
-__status__ = "Development Status :: 5 - Production/Stable"
+__status__ = "Development Status :: Developement/Un-stable"
