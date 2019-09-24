@@ -34,7 +34,7 @@ def _get_parser():
     parser.add_argument(
         "--x_label",
         "-x",
-        default="Load (kN)",
+        default="Displacement (mm)",
         type=str,
         help="set x label",
     )
@@ -42,7 +42,7 @@ def _get_parser():
     parser.add_argument(
         "--y_label",
         "-y",
-        default="Displacement (mm)",
+        default="Load (kN)",
         type=str,
         help="set y label",
     )
